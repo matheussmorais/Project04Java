@@ -11,7 +11,7 @@ public class BD {
     
      public static ArrayList<Usuario> getUsuariosList(){
          if(usuariosList == null){
-             usuariosList = new ArrayList();
+             usuariosList = new ArrayList<>();
              Usuario u1 = new Usuario();
              u1.setNome("Manoel");
              u1.setSobrenome("Rodriguez");
@@ -20,17 +20,17 @@ public class BD {
              usuariosList.add(u1);
              
              Usuario u2 = new Usuario();
-             u1.setNome("Matheus");
-             u1.setSobrenome("Morais");
-             u1.setEmail("matheus@gmail.com");
-             u1.setMedia(0);
+             u2.setNome("Matheus");
+             u2.setSobrenome("Morais");
+             u2.setEmail("matheus@gmail.com");
+             u2.setMedia(0);
              usuariosList.add(u2);
              
              Usuario u3 = new Usuario();
-             u1.setNome("Wagner");
-             u1.setSobrenome("Alves");
-             u1.setEmail("wagner@gmail.com");
-             u1.setMedia(0);
+             u3.setNome("Wagner");
+             u3.setSobrenome("Alves");
+             u3.setEmail("wagner@gmail.com");
+             u3.setMedia(0);
              usuariosList.add(u3);
              
              
