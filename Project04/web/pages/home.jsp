@@ -4,8 +4,26 @@
     Author     : Manoel Rodriguez
 --%>
 
+<%@page import="br.com.fatecpg.project04.Quiz"%>
+<%@page import="br.com.fatecpg.project04.Question"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<%
+  double grade = 0.0;
+  int corretas = 0;
+  if (request.getParameter("RealizaTeste")!=null){
+      for(Question q: Quiz.getMathTest()){
+          if (request.getParameter(q.getPergunta())!=null){
+          String userPergunta = request.getParameter(q.getPergunta());
+          if(q.getResposta().equals(userPergunta)){
+              corretas++;
+          }
+        }
+      }
+      grade = (double) corretas / (double)Quiz.getMathTest().size();
+  }  
+%>
 <html lang="pt-br">
 
     <head>
@@ -19,7 +37,7 @@
 
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Teste Online</a>
+            <a class="navbar-brand" href="home.jsp">Teste Online</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#conteudoNavbarSuportado"
                     aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Alterna navegação">
                 <span class="navbar-toggler-icon"></span>
@@ -31,7 +49,7 @@
                         <a class="nav-link" href="#">Home <span class="sr-only">(página atual)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Realizar este</a>
+                        <a class="nav-link" href="teste.jsp">Realizar Teste</a>
                     </li>
                     <div id="usuario" style="position: absolute; right: 10px;">
                         <li class="nav-item dropdown">
@@ -56,6 +74,25 @@
                 </p>
             </div>
         </div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6" style="text-align: justify;">
+        <%if (request.getParameter("RealizaTeste")==null) {%>
+           <h3></h3>
+        <%}else{%>
+        <h2>Você acertou
+            <u> <%=(grade*100)%> %</u> 
+            das questões.</h2>
+        <h3><a href="teste.jsp" style="color: #000000">Realizar novamente o Quiz.</a></h3>
+        <%}%>
+        
+        <br>
+                </div>
+            </div>
+        </div>
+        
+        
         <div class="container">
             <div class="row">
 
