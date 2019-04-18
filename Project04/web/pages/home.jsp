@@ -10,19 +10,22 @@
 <!DOCTYPE html>
 
 <%
-  double grade = 0.0;
-  int corretas = 0;
-  if (request.getParameter("RealizaTeste")!=null){
-      for(Question q: Quiz.getMathTest()){
-          if (request.getParameter(q.getPergunta())!=null){
-          String userPergunta = request.getParameter(q.getPergunta());
-          if(q.getResposta().equals(userPergunta)){
-              corretas++;
-          }
+    double grade = 0.0;
+    int nota = 0;
+    int somanota = 0;
+    if (request.getParameter("RealizaTeste") != null) {
+        for (Question q : Quiz.getMathTest()) {
+            if (request.getParameter(q.getPergunta()) != null) {
+                String userPergunta = request.getParameter(q.getPergunta());
+                if (q.getResposta().equals(userPergunta)) {
+                    nota++;
+                }
+            }
+
         }
-      }
-      grade = (double) corretas / (double)Quiz.getMathTest().size();
-  }  
+        grade = (double) nota / (double) Quiz.getMathTest().size();
+        somanota += nota;
+    }
 %>
 <html lang="pt-br">
 
@@ -74,25 +77,27 @@
                 </p>
             </div>
         </div>
-        
+
         <div class="container">
             <div class="row">
                 <div class="col-md-6" style="text-align: justify;">
-        <%if (request.getParameter("RealizaTeste")==null) {%>
-           <h3></h3>
-        <%}else{%>
-        <h2>Você acertou
-            <u> <%=(grade*100)%> %</u> 
-            das questões.</h2>
-        <h3><a href="teste.jsp" style="color: #000000">Realizar novamente o Quiz.</a></h3>
-        <%}%>
-        
-        <br>
+                    <%if (request.getParameter("RealizaTeste") == null) {%>
+                    <h3></h3>
+                    <%} else {%>
+                    <h2>Você acertou
+                        <u> <%=(grade * 100)%></u>
+                        % das questões.
+                        Nota: <%= nota%>
+                    </h2>
+                    <h3><a href="teste.jsp" style="color: #000000">Realizar novamente o Quiz.</a></h3>
+                    <%}%>
+
+                    <br>
                 </div>
             </div>
         </div>
-        
-        
+
+
         <div class="container">
             <div class="row">
 
